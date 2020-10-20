@@ -39,7 +39,7 @@ func (u UploadRecord) SaveRecord() (int64, error) {
  * 根据用户Id查询符合条件的认证数据记录
  */
 func QueryRecordsByUserId(userId int) ([]UploadRecord, error) {
-	rs, err := db_mysql.Db.Query("select id, user_id, file_name, file_size, file_cert, file_title, cert_time from upload_record where user_id = ?", userId)
+	rs, err := db_mysql.Db.Query("select /*id,*/ user_id, file_name, file_size, file_cert, file_title, cert_time from upload_record where user_id = ?", userId)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func QueryRecordsByUserId(userId int) ([]UploadRecord, error) {
 	records := make([]UploadRecord, 0) //容器
 	for rs.Next() {
 		var record UploadRecord
-		err := rs.Scan(&record.Id, &record.UserId, &record.FileName, &record.FileSize, &record.FileCert, &record.FileTitle, &record.CertTime)
+		err := rs.Scan(/*&record.Id,*/ &record.UserId, &record.FileName, &record.FileSize, &record.FileCert, &record.FileTitle, &record.CertTime)
 		if err != nil {
 			return nil, err
 		}

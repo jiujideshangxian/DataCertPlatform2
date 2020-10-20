@@ -99,7 +99,7 @@
                                                                                                       style="line-height: 44px;"></label>
                             </p></div>
                         <span class="name">手机号码</span></section>
-                    <section>
+                  {{/*  <section>
                         <div class="verify"><span class="name">图形验证码</span><img
                                 src="data:image/png;base64,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"
                                 style="width: 88px; height: 30px; margin-left: 136px;"></div>
@@ -129,7 +129,7 @@
                                     class="iconfont font-error" style="line-height: 44px;"></i><label class="error-text"
                                                                                                       style="line-height: 44px;"></label>
                             </p></div>
-                    </section>
+                    </section>*/}}
                     <section>
                         <div class="verify"><span class="name">设置密码</span>
                             <div class="code"
