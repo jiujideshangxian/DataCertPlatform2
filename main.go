@@ -39,5 +39,6 @@ func main() {
 	beego.SetStaticPath("/img", "./static/img")
 
 	beego.Run() //阻塞
+	fmt.Println("hi")
 	//http.ListenAndServe(":8080")
 }
