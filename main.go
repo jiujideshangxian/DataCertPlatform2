@@ -40,5 +40,7 @@ func main() {
 
 	beego.Run() //阻塞
 	fmt.Println("hi")
+	fmt.Println("hi")
+	fmt.Println("hi2")
 	//http.ListenAndServe(":8080")
 }
