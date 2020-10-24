@@ -42,5 +42,6 @@ func main() {
 	fmt.Println("hi")
 	fmt.Println("hi")
 	fmt.Println("hi2")
+	fmt.Println("hi3")
 	//http.ListenAndServe(":8080")
 }
