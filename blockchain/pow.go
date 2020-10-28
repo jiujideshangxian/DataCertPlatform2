@@ -7,7 +7,7 @@ import (
 	"bytes"
 )
 
-const DIFFICULTY = 5
+const DIFFICULTY = 16
 
 /**
  * 工作量证明算法结构体
