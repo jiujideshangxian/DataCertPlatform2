@@ -19,6 +19,7 @@ func main() {
 	db_mysql.Connect()
 	fmt.Println("hi6")
 	fmt.Println("hi7")
+	fmt.Println("hi8")
 
 	//设置静态资源文件映射
 	beego.SetStaticPath("/js", "./static/js")
