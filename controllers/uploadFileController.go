@@ -8,6 +8,7 @@ import (
 	"DataCertPlatform/models"
 	"time"
 	"DataCertPlatform/utils"
+	"DataCertPlatform/blockchain"
 )
 
 /**
@@ -45,7 +46,7 @@ func (u *UploadFileController) Post() {
 
 	//3、计算文件的SHA256值
 	fileHash, err := utils.SHA256HashReader(file)
-	fmt.Println(fileHash)
+	//fmt.Println(fileHash)
 
 	//先查询用户id
 	user1, err := models.User{Phone: phone}.QueryUserByPhone()
@@ -78,6 +79,31 @@ func (u *UploadFileController) Post() {
 		u.Ctx.WriteString("抱歉，电子数据认证保存失败，请稍后再试!")
 		return
 	}
+
+	user := &models.User{
+		Phone: phone,
+	}
+	user, _ = user.QueryUserByPhone()
+	//③ 将用户上传的文件的md5值和sha256值保存到区块链上，即数据上链
+	certRecord := models.CertRecord{
+		CertId:   []byte(md5String),
+		CertHash: []byte(fileHash),
+		CertName: user.Name,
+		CertCard: user.Card,
+		Phone:    user.Phone,
+		FileName: header.Filename,
+		FileSize: header.Size,
+		CertTime: time.Now().Unix(),
+	}
+	//序列化
+	certBytes, _ := certRecord.Serialize()
+	block, err := blockchain.CHAIN.SaveData(certBytes)
+	if err != nil {
+		u.Ctx.WriteString("抱歉，数据上链错误：" + err.Error())
+		return
+	}
+	fmt.Println("恭喜，已经数据保存到区块链中，区块高度是:", block.Height)
+
 	//上传文件保存到数据库中成功
 	records, err := models.QueryRecordsByUserId(user1.Id)
 	if err != nil {

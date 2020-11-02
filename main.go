@@ -5,21 +5,15 @@ import (
 	_ "DataCertPlatform/routers"
 	"github.com/astaxie/beego"
 	"DataCertPlatform/blockchain"
-	"fmt"
 )
 
 func main() {
-	//1创世区块
-	bc := blockchain.NewBlockChain() //封装
-	fmt.Printf("创世区块的哈希值:%x\n", bc.LastHash)
-	//bc.SaveData([]byte("用户要保存到区块中的数据"))
-	return
+
+	//先准备一条区块链
+	blockchain.NewBlockChain()
 
 	//连接数据库
 	db_mysql.Connect()
-	fmt.Println("hi6")
-	fmt.Println("hi7")
-	fmt.Println("hi8")
 
 	//设置静态资源文件映射
 	beego.SetStaticPath("/js", "./static/js")
