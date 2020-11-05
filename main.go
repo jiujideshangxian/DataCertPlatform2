@@ -1,14 +1,13 @@
 package main
 
 import (
-	_ "DataCertPlatform/routers"
 	"DataCertPlatform/blockchain"
-	"fmt"
+	_ "DataCertPlatform/routers"
 	"github.com/astaxie/beego"
 )
 
 func main() {
-fmt.Println("完")
+
 	//先准备一条区块链
 	blockchain.NewBlockChain()
 
